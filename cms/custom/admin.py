@@ -8,11 +8,13 @@ from mezzanine.galleries.admin import GalleryAdmin
 from mezzanine.galleries.models import Gallery
 from mezzanine.pages.models import RichTextPage
 
-from mezzanine.core.admin import DisplayableAdmin, DisplayableAdminForm
+from mezzanine.core.admin import DisplayableAdmin, DisplayableAdminForm, SingletonAdmin
 
-from .models import CatalystPage
+from .models import CatalystPage, HomePage
 
 class CatalystPageAdmin(PageAdmin):
+    fieldsets = deepcopy(PageAdmin.fieldsets)
+class HomePageAdmin(PageAdmin):
     fieldsets = deepcopy(PageAdmin.fieldsets)
 
 # Register your models here.
@@ -20,3 +22,4 @@ admin.site.unregister(Gallery)
 admin.site.unregister(Form)
 admin.site.unregister(RichTextPage)
 admin.site.register(CatalystPage, CatalystPageAdmin)
+admin.site.register(HomePage, HomePageAdmin)

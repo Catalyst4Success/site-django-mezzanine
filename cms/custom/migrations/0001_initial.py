@@ -12,22 +12,43 @@ class Migration(SchemaMigration):
         db.create_table(u'custom_catalystpage', (
             (u'page_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['pages.Page'], unique=True, primary_key=True)),
             ('content', self.gf('mezzanine.core.fields.RichTextField')()),
-            ('title_color', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True)),
+            ('title_color', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
+            ('navbar_title', self.gf('django.db.models.fields.CharField')(max_length=20, blank=True)),
+            ('font_awesome_icon', self.gf('django.db.models.fields.CharField')(max_length=20, blank=True)),
         ))
         db.send_create_signal(u'custom', ['CatalystPage'])
+
+        # Adding model 'HomePage'
+        db.create_table(u'custom_homepage', (
+            (u'page_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['pages.Page'], unique=True, primary_key=True)),
+            ('content', self.gf('mezzanine.core.fields.RichTextField')()),
+            ('font_awesome_icon', self.gf('django.db.models.fields.CharField')(max_length=20, blank=True)),
+        ))
+        db.send_create_signal(u'custom', ['HomePage'])
 
 
     def backwards(self, orm):
         # Deleting model 'CatalystPage'
         db.delete_table(u'custom_catalystpage')
 
+        # Deleting model 'HomePage'
+        db.delete_table(u'custom_homepage')
+
 
     models = {
         u'custom.catalystpage': {
             'Meta': {'ordering': "(u'_order',)", 'object_name': 'CatalystPage', '_ormbases': [u'pages.Page']},
             'content': ('mezzanine.core.fields.RichTextField', [], {}),
+            'font_awesome_icon': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
+            'navbar_title': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'}),
-            'title_color': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'})
+            'title_color': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'})
+        },
+        u'custom.homepage': {
+            'Meta': {'ordering': "(u'_order',)", 'object_name': 'HomePage', '_ormbases': [u'pages.Page']},
+            'content': ('mezzanine.core.fields.RichTextField', [], {}),
+            'font_awesome_icon': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
+            u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'pages.page': {
             'Meta': {'ordering': "(u'titles',)", 'object_name': 'Page'},

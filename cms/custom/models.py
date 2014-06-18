@@ -10,4 +10,12 @@ class CatalystPage(Page, RichText):
         verbose_name = _("Catalyst Page")
         verbose_name_plural = _("Catalyst Pages")
 
+class HomePage(Page):
+    font_awesome_icon = models.CharField(_("Font Awesome Icon"), max_length=20, blank=True)
+    class Meta:
+        verbose_name = _("Home Page")
+        verbose_name_plural = _("Home Pages")
+
+
+
 # Create your models here.

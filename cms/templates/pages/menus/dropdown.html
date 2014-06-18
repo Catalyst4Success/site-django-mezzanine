@@ -8,7 +8,7 @@
     {% for page in page_branch %}
     {% if not has_home and page.is_primary and forloop.first %}
     <li{% if on_home %} class="active"{% endif %} id="dropdown-menu-home">
-    <a href="{% url "home" %}">{% trans "HOME" %}</a>
+    <a href="{% url "home" %}"><i class="fa fa-home"></i>{% trans "HOME" %}</a>
     </li>
     {% endif %}
 
@@ -20,9 +20,15 @@
         {% if page.has_children_in_menu %}
         class="dropdown-toggle disabled" data-toggle="dropdown"
         {% endif %}>
+
         {% if page.catalystpage.font_awesome_icon %}
         <i class="fa {{ page.catalystpage.font_awesome_icon }}"></i>
         {% endif %}
+
+        {% if page.homepage.font_awesome_icon %}
+        <i class="fa {{ page.homepage.font_awesome_icon }}"></i>
+        {% endif %}
+
 
         {% if page.catalystpage.navbar_title %}
             {{ page.catalystpage.navbar_title|upper }}

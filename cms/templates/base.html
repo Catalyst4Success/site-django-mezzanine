@@ -49,6 +49,8 @@
 
 <body id="{% block body_id %}body{% endblock %}" style="padding-top:0px;">
 
+{% block before_bar %}{% endblock %}
+
 <div id="navbarfiller">
     <div id="navbar" class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -93,16 +95,7 @@
     </center>
 
 </div>
-
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-12">
             {% block main %}{% endblock %}
-        </div>
-
-            </div>
-</div>
 
 <div class="footer">
     <div class="row">

@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block main %}
-
+<div class="container">
 {% if tag or category or year or month or author %}
     {% block blog_post_list_filterinfo %}
     <p>
@@ -142,6 +142,7 @@
     {% endif %}
     {% endif %}
     </p>
+</div>
 </div>
 {% endblock %}
 {% endfor %}
