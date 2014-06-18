@@ -32,10 +32,12 @@
     <a href="#reply-{{ comment.id }}" class="reply">
         <span class="glyphicon glyphicon-share-alt"></span> {% trans "Reply" %}
     </a>
+    <!--
     {% if settings.COMMENTS_USE_RATINGS %}
     <div class="rating">
     {% rating_for comment %}
     </div>
+    -->
     {% endif %}
     <form class="comment-reply-form" method="post" id="reply-{{ comment.id }}"
         action="{{ comment_url }}#reply-{{ comment.id }}"

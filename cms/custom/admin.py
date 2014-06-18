@@ -18,7 +18,6 @@ class HomePageAdmin(PageAdmin):
     fieldsets = deepcopy(PageAdmin.fieldsets)
 
 # Register your models here.
-admin.site.unregister(Gallery)
 admin.site.unregister(Form)
 admin.site.unregister(RichTextPage)
 admin.site.register(CatalystPage, CatalystPageAdmin)
