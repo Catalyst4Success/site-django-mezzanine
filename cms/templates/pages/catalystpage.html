@@ -1,0 +1,16 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block titlestyle %}
+{{ page.catalystpage.title_color }}
+{% endblock %}
+
+{% block main %}{{ block.super }}
+{% editable page.catalystpage.content %}
+{{ page.catalystpage.content|richtext_filters|safe }}
+{% endeditable %}
+
+
+{% endblock %}
+
