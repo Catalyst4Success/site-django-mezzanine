@@ -3,10 +3,10 @@
 {% load pages_tags mezzanine_tags %}
 
 {% block main %}{{ block.super }}
+<div class="container">
 {% editable page.videospage.content %}
 {{ page.videospage.content|richtext_filters|safe }}
 {% endeditable %}
-<div class="container">
     <br>
     <ul id="mainnav" style="text-align:center;" class="nav nav-tabs">
 
