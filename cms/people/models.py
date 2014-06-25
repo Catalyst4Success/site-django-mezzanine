@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from mezzanine.pages.models import Page, RichText
-from mezzanine.core.models import Orderable, RichText
+from mezzanine.core.models import Orderable, RichText, Slugged
 from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.utils.models import upload_to
+from mezzanine.generic.fields import KeywordsField
+
 
 class PeoplePage(Page, RichText):
         
@@ -19,10 +21,25 @@ class Person(Orderable):
     file = FileField(_("File"), max_length=200, format="Image",
             upload_to=upload_to("People.Person.file", "People"))
     bio = RichTextField(_("Bio"), blank=True)
+    section = models.ManyToManyField("MemberCategory", verbose_name=_("Section"), blank=True) 
 
+    def __str__(self):
+        return self.name
+    
     class Meta:
         verbose_name = _("Person")
         verbose_name_plural = _("People")
+
+
+class MemberCategory(Slugged):
+    class Meta:
+        verbose_name = _("Member Category")
+        verbose_name_plural = _("Member Categories")
+        ordering = ("title",)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ("people_list_category", (), {"category": self.slug})
 
 
 # Create your models here.

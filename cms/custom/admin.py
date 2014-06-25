@@ -8,17 +8,19 @@ from mezzanine.galleries.admin import GalleryAdmin
 from mezzanine.galleries.models import Gallery
 from mezzanine.pages.models import RichTextPage
 
-from mezzanine.core.admin import DisplayableAdmin, DisplayableAdminForm, SingletonAdmin
+from mezzanine.core.admin import DisplayableAdmin, DisplayableAdminForm, SingletonAdmin, StackedDynamicInlineAdmin
 
-from .models import CatalystPage, HomePage
+from .models import CatalystPage, HomePage, Section
+
+class SectionInline(StackedDynamicInlineAdmin):
+    model = Section
 
 class CatalystPageAdmin(PageAdmin):
-    fieldsets = deepcopy(PageAdmin.fieldsets)
-class HomePageAdmin(PageAdmin):
-    fieldsets = deepcopy(PageAdmin.fieldsets)
+    inlines = (SectionInline,)
+
 
 # Register your models here.
 admin.site.unregister(Form)
 admin.site.unregister(RichTextPage)
 admin.site.register(CatalystPage, CatalystPageAdmin)
-admin.site.register(HomePage, HomePageAdmin)
+admin.site.register(HomePage, PageAdmin)
