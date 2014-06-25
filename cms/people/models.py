@@ -21,7 +21,7 @@ class Person(Orderable):
     file = FileField(_("File"), max_length=200, format="Image",
             upload_to=upload_to("People.Person.file", "People"))
     bio = RichTextField(_("Bio"), blank=True)
-    section = models.ManyToManyField("MemberCategory", verbose_name=_("Section"), blank=True) 
+    member_category = models.ManyToManyField("MemberCategory", verbose_name=_("Member Category"), blank=True, related_name="people") 
 
     def __str__(self):
         return self.name
@@ -32,14 +32,13 @@ class Person(Orderable):
 
 
 class MemberCategory(Slugged):
+    page = models.ForeignKey("PeoplePage", related_name="categories") 
+    heading_bar_color = models.CharField(_("Heading Bar Color"), max_length=10, blank=True)
+
     class Meta:
         verbose_name = _("Member Category")
         verbose_name_plural = _("Member Categories")
         ordering = ("title",)
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ("people_list_category", (), {"category": self.slug})
 
 
 # Create your models here.

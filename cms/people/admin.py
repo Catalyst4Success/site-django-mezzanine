@@ -10,19 +10,19 @@ from .models import Person, PeoplePage, MemberCategory
 
 class PeopleInline(StackedDynamicInlineAdmin):
     model = Person
-    filter_horizontal = ("section",)
-    list_filter = deepcopy(DisplayableAdmin.list_filter) + ("sections",)
+    filter_horizontal = ("member_category",)
+    list_filter = deepcopy(DisplayableAdmin.list_filter) + ("member_category",)
 
     def __init__(self, *args, **kwargs):
        super(PeopleInline, self).__init__(*args, **kwargs) 
        fields = self.fields
-       fields.append('section')
+       fields.append('member_category')
 
 class MemberCategoryAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {"fields": ("title",)}),)
+    fieldsets = ((None, {"fields": ("title","page","heading_bar_color",)}),)
 
     def in_menu(self):
-        return False;
+        return True;
 
 class PeopleAdmin(PageAdmin):
     inlines = (PeopleInline,)
