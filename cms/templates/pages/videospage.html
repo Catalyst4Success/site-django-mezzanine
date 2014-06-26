@@ -10,19 +10,9 @@
     <br>
     <ul id="mainnav" style="text-align:center;" class="nav nav-tabs">
 
-
-
-        {% with page.videospage.videos.all|slice:":1" as videos %}
-
+        {% with page.videospage.videos.all as videos %}
         {% for video in videos %}
-        <li style="float:none; display:inline-block;" class="active"><a href="#{{ video.name | slugify }}"data-toggle="tab">{{ video.name }}</a></li>
-        {% endfor %}
-        {% endwith %}
-
-
-        {% with page.videospage.videos.all|slice:"1:" as videos %}
-        {% for video in videos %}
-        <li style="float:none; display:inline-block;" class=""><a href="#{{ video.name | slugify }}" data-toggle="tab">{{ video.name }}</a></li>
+        <li style="float:none; display:inline-block;" {% if forloop.first %}class="active" {% endif %}><a href="#{{ video.name | slugify }}" data-toggle="tab">{{ video.name }}</a></li>
         {% endfor %}
         {% endwith %}
 
@@ -30,19 +20,10 @@
     </ul>
     <br>
     <div class="tab-content">
-        {% with page.videospage.videos.all|slice:":1" as videos %}
+        
+        {% with page.videospage.videos.all as videos %}
         {% for video in videos %}
-        <div class="tab-pane active" id="{{ video.name | slugify }}"><center>
-                <div class="video-container">
-                    <iframe src="{{ video.link }}&output=embed" frameborder="0" allowfullscreen=""></iframe>
-            </div></center>
-        </div>
-        {% endfor %}
-        {% endwith %}
-
-        {% with page.videospage.videos.all|slice:"1:" as videos %}
-        {% for video in videos %}
-        <div class="tab-pane" id="{{ video.name | slugify }}"><center>
+        <div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ video.name | slugify }}"><center>
                 <div class="video-container">
                     <iframe src="{{ video.link }}&output=embed" frameborder="0" allowfullscreen=""></iframe>
             </div></center>

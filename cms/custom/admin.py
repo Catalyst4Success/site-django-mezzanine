@@ -12,13 +12,6 @@ from mezzanine.core.admin import DisplayableAdmin, DisplayableAdminForm, Singlet
 
 from .models import CatalystPage, HomePage, Section
 
-class NewPageAdmin(PageAdmin):
-
-    def __init__(self, *args, **kwargs):
-        super(NewPageAdmin, self).__init__(*args, **kwargs)
-        new_fieldsets = deepcopy(PageAdmin.fieldsets)
-        new_fieldsets[0][1]["fields"] += ("font awesome icon",)
-        fieldsets = new_fieldsets
 
 class SectionInline(StackedDynamicInlineAdmin):
     model = Section

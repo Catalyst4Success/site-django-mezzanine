@@ -270,6 +270,7 @@ INSTALLED_APPS = (
         'custom',
         'videos',
         'people',
+        'localchapters',
         )
 
 # List of processors used by RequestContext to populate the context.
