@@ -24,7 +24,10 @@
 {% endblock %}
 
 {% block title %}
+{% if page.homepage %}
+{% else %}
 {% editable page.title %}{{ page.title }}{% endeditable %}
+{% endif %}
 {% endblock %}
 
 
