@@ -12,13 +12,14 @@
     <div class="row" style="width:100%;">
         <div class="col-md-4 col-md-offset-1" style="padding-right:0px">
         <ul id="row" class="nav nav-pills nav-stacked">
+
             {% with page.localchapterspage.chapters.all as chapterg %}
             {% for chapter in chapterg %}
-                
             <li {% if forloop.first %}class="active"{% endif %} {% if forloop.last %} style="border-bottom:1px solid black;" {% endif %} id="{{ chapter.schoolName | slugify }}" onclick="changeChapter('{{ chapter.schoolName | slugify }}')"><a href="#"><center>{{ chapter.schoolName }}</center></a></li>
 
             {% endfor %}
             {% endwith %}
+
         </ul>
     </div>
     <div class="col-md-7" id="map" style="border:1px solid black; border-left:0px; background-color:#7DCBE5 ">
@@ -28,18 +29,27 @@
         <div class="col-md-6" style="max-width:100%">
             <center>
                 <br><br>
-                <p style="font-weight:bold" id="school-name">Westview High School</p>
-                <p id="school-address">13500 Camino Del Sur<br>San Diego, CA, 92129</p>
-                <a id="school-website" href="http://wv.catalyst4success.org">http://wv.catalyst4success.org</a>
-                <p id="school-contact">(858)212-7456<br>c4swestview@gmail.com</p>
+                {% with page.localchapterspage.chapters.all|slice:":1" as chapterg %}
+                {% for chapter in chapterg %}
+                <p style="font-weight:bold" id="school-name">{{ chapter.schoolName }}</p>
+                <p id="school-address">{{ chapter.schoolAddress }}<br>{{ chapter.schoolCity }}, {{ chapter.schoolState }}, {{ chapter.schoolZipCode }}</p>
+                <a id="school-website" href="{{ chapter.chapterWebsite }}">{{ chapter.chapterWebsite }}</a>
+                <p id="school-contact">{{ chapter.chapterNumber }}<br>{{ chapter.chapterEmail }}</p>
+
+
+
+                {% endfor %}
+                {% endwith %}
+
+
             </center>
         </div>
     </div>
 </div>
 <br>
 {% editable page.localchapterspage.extra_info %}
-    {{ page.localchapterspage.extra_info|richtext_filters|safe }}
-    {% endeditable %}
+{{ page.localchapterspage.extra_info|richtext_filters|safe }}
+{% endeditable %}
 <br>
 </div>
 
@@ -78,7 +88,7 @@ $(window).on('resize', function() {
 
 <script>
 function changeChapter(chapter){
-    
+
     {% with page.localchapterspage.chapters.all as chapterg %}
     {% for chapter in chapterg %}
 
@@ -88,16 +98,16 @@ function changeChapter(chapter){
     {% endwith %}
 
     $("#" + chapter).attr("class", "active");
-    
+
     {% with page.localchapterspage.chapters.all as chapterg %}
     {% for chapter in chapterg %}
 
     if(chapter == "{{ chapter.schoolName | slugify }}"){
         $("#school-name").html("{{ chapter.schoolName }}");
         $("#school-address").html("{{ chapter.schoolAddress }}<br>{{ chapter.schoolCity }}, {{ chapter.schoolState }}, {{ chapter.schoolZipCode }}");
-        $("#school-website").html("{{ chapter.schoolWebsite }}");
-        $("#school-website").attr("href", "{{ chapter.schoolWebsite }}");
-        $("#school-contact").html("{{ chapter.schoolNumber }}<br>{{ chapter.schoolEmail }}");
+        $("#school-website").html("{{ chapter.chapterWebsite }}");
+        $("#school-website").attr("href", "{{ chapter.chapterWebsite }}");
+        $("#school-contact").html("{{ chapter.chapterNumber }}<br>{{ chapter.chapterEmail }}");
     }
 
 
