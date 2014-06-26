@@ -51,25 +51,39 @@ from __future__ import absolute_import, unicode_literals
 # field instance. When specifying the field class, the path
 # ``django.models.db.`` can be omitted for regular Django model fields.
 #
-# EXTRA_MODEL_FIELDS = (
-#     (
-#         # Dotted path to field.
-#         "mezzanine.blog.models.BlogPost.image",
-#         # Dotted path to field class.
-#         "somelib.fields.ImageField",
-#         # Positional args for field class.
-#         ("Image",),
-#         # Keyword args for field class.
-#         {"blank": True, "upload_to": "blog"},
-#     ),
-#     # Example of adding a field to *all* of Mezzanine's content types:
-#     (
-#         "mezzanine.pages.models.Page.another_field",
-#         "IntegerField", # 'django.db.models.' is implied if path is omitted.
-#         ("Another name",),
-#         {"blank": True, "default": 1},
-#     ),
-# )
+EXTRA_MODEL_FIELDS = (
+     #(
+         # Dotted path to field.
+         #"mezzanine.blog.models.BlogPost.image",
+         # Dotted path to field class.
+         #"somelib.fields.ImageField",
+         # Positional args for field class.
+         #("Image",),
+         # Keyword args for field class.
+         #{"blank": True, "upload_to": "blog"},
+     #),
+     # Example of adding a field to *all* of Mezzanine's content types:
+     (
+         "mezzanine.pages.models.Page.font_awesome_icon",
+         "CharField", # 'django.db.models.' is implied if path is omitted.
+         ("Font Awesome Icon",),
+         {"blank": True, "max_length": 20},
+
+     ),
+     (
+         "mezzanine.pages.models.Page.navbar_title",
+         "CharField", # 'django.db.models.' is implied if path is omitted.
+         ("Title on Navbar",),
+         {"blank": True, "max_length": 20},
+     ),
+     (
+         "mezzanine.pages.models.Page.title_color",
+         "CharField", # 'django.db.models.' is implied if path is omitted.
+         ("Title Color",),
+         {"blank": True, "max_length": 10},
+     ),
+
+)
 
 # Setting to turn on featured images for blog posts. Defaults to False.
 #

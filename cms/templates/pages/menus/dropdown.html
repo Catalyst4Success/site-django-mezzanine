@@ -21,17 +21,12 @@
         class="dropdown-toggle disabled" data-toggle="dropdown"
         {% endif %}>
 
-        {% if page.catalystpage.font_awesome_icon %}
-        <i class="fa {{ page.catalystpage.font_awesome_icon }}"></i>
+        {% if page.font_awesome_icon %}
+        <i class="fa {{ page.font_awesome_icon }}"></i>
         {% endif %}
 
-        {% if page.homepage.font_awesome_icon %}
-        <i class="fa {{ page.homepage.font_awesome_icon }}"></i>
-        {% endif %}
-
-
-        {% if page.catalystpage.navbar_title %}
-            {{ page.catalystpage.navbar_title|upper }}
+        {% if page.navbar_title %}
+            {{ page.navbar_title|upper }}
         {% else %}
             {{ page.title|upper }}
         {% endif %}

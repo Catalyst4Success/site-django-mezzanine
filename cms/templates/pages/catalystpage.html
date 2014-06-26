@@ -2,10 +2,6 @@
 
 {% load pages_tags mezzanine_tags %}
 
-{% block titlestyle %}
-{{ page.catalystpage.title_color }}
-{% endblock %}
-
 {% block main %}{{ block.super }}
 
 <div class="container" style="width:100%">
@@ -30,10 +26,5 @@
 {% endwith %}
 
 
-{% endblock %}
-
-
-{% block title %}
-{% editable page.title %}{{ page.title }}{% endeditable %}
 {% endblock %}
 
