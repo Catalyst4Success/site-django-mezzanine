@@ -25,9 +25,12 @@ class GridSectionInline(StackedDynamicInlineAdmin):
 class GridPageAdmin(PageAdmin):
     inlines = (GridSectionInline,)
 
+class HomePageAdmin(PageAdmin):
+    filter_horizontal = ("blog_posts",)
+    list_filter = deepcopy(DisplayableAdmin.list_filter) + ("blog_posts",)
+
 # Register your models here.
-admin.site.unregister(Form)
 admin.site.unregister(RichTextPage)
 admin.site.register(CatalystPage, CatalystPageAdmin)
-admin.site.register(HomePage, PageAdmin)
+admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(GridPage, GridPageAdmin)
