@@ -12,7 +12,7 @@
 
 {% with page.catalystpage.sections.all as sections %}
 {% for section in sections %}
-<div style="background-color:{{ section.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
+<div id="{{ section.title | slugify }}" style="background-color:{{ section.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
     {% editable section.title %}<h1 style="color:white"><center>{{ section.title }}</center></h1>{% endeditable %}
 </div>
 

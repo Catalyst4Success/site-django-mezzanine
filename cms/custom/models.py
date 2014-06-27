@@ -5,8 +5,8 @@ from mezzanine.core.fields import RichTextField
 
 class CatalystPage(Page, RichText):
     class Meta:
-        verbose_name = _("Catalyst Page")
-        verbose_name_plural = _("Catalyst Pages")
+        verbose_name = _("Section Page")
+        verbose_name_plural = _("Section Pages")
 
 class Section(Orderable):
     page = models.ForeignKey("CatalystPage", related_name="sections")
@@ -17,11 +17,20 @@ class Section(Orderable):
     def __str__(self):
         return self.title
 
+class GridPage(Page, RichText):
+    class Meta:
+        verbose_name = _("Grid Page")
+        verbose_name_plural = _("Grid Pages")
+
+class GridSection(Orderable):
+    page = models.ForeignKey("GridPage", related_name="gridsection")
+    title = models.CharField(_("Section Title"), max_length = 100)
+    icon = models.CharField(_("Section Icon"), max_length = 100)
+    textfield = RichTextField(_("Content"), blank=True)
+
 class HomePage(Page):
     class Meta:
         verbose_name = _("Home Page")
         verbose_name_plural = _("Home Pages")
-
-
 
 # Create your models here.
