@@ -1,0 +1,66 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+    <br>
+
+
+<div class="row" style="padding-left: 25px; width:100%;">
+            {% with nolabel as people %}
+        {% for person in people %}
+
+        {% if forloop.counter|divisibleby:4 %}</div>{% endif %}
+        {% if forloop.counter|divisibleby:4 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
+        <div class="col-md-4">
+            <img style="float: left; padding-right: 10px; height:133px;" src="{{ person.file.url }}">
+            <h2>{% editable person.name %}{{ person.name }}{% endeditable %}</h2>
+            <h4>{% editable person.position %}{{ person.position }}{% endeditable %}</h4>
+            <p>{% editable person.email %}{{ person.email }}{% endeditable %}</p>
+            {% editable person.bio %}{{ person.bio|richtext_filters|safe }}{% endeditable %}
+
+        </div>
+        {% endfor %}
+        {% endwith %}
+</div>
+
+
+{% with page.peoplepage.categories.all as categories %}
+    {% for category in categories %}
+        <div style="background-color:{{ category.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
+            {% editable category.title %}<h1 style="color:black"><center>{{ category.title }}</center></h1>{% endeditable %}
+        </div>
+
+
+<div class="row" style="padding-left: 25px; width:100%;">
+            {% with category.people.all as people %}
+        {% for person in people %}
+
+        {% if forloop.counter|divisibleby:4 %}</div>{% endif %}
+        {% if forloop.counter|divisibleby:4 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
+        <div class="col-md-4">
+            <img style="float: left; padding-right: 10px; height:133px;" src="{{ person.file.url }}">
+            <h2>{% editable person.name %}{{ person.name }}{% endeditable %}</h2>
+            <h4>{% editable person.position %}{{ person.position }}{% endeditable %}</h4>
+            <p>{% editable person.email %}{{ person.email }}{% endeditable %}</p>
+            {% editable person.bio %}{{ person.bio|richtext_filters|safe }}{% endeditable %}
+
+        </div>
+        {% endfor %}
+        {% endwith %}
+</div>
+
+    {% endfor %}
+    {% endwith %}
+
+<div class="container">
+{% editable page.peoplepage.content %}
+{{ page.peoplepage.content|richtext_filters|safe }}
+{% endeditable %}
+</div>
+
+
+<br><br><br><br><br>
+
+{% endblock %}
+

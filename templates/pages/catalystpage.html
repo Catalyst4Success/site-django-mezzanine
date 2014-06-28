@@ -1,0 +1,30 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+
+<div class="container" style="width:100%">
+{% editable page.catalystpage.content %}
+{{ page.catalystpage.content|richtext_filters|safe }}
+{% endeditable %}
+</div>
+
+{% with page.catalystpage.sections.all as sections %}
+{% for section in sections %}
+<div id="{{ section.title | slugify }}" style="background-color:{{ section.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
+    {% editable section.title %}<h1 style="color:white"><center>{{ section.title }}</center></h1>{% endeditable %}
+</div>
+
+<div class="container" style="width:100%">
+{% editable section.textfield %}
+{{ section.textfield|richtext_filters|safe }}
+{% endeditable %}
+</div>
+<br><br>
+{% endfor %}
+{% endwith %}
+
+
+{% endblock %}
+

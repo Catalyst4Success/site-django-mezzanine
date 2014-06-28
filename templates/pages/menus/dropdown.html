@@ -1,0 +1,96 @@
+{% load i18n future pages_tags %}
+{% spaceless %}
+{% if page_branch_in_menu %}
+
+{% if branch_level == 0 %}
+<ul style="padding-left: 10px;" class="nav navbar-nav">
+
+    {% for page in page_branch %}
+    {% if not has_home and page.is_primary and forloop.first %}
+    <li{% if on_home %} class="active"{% endif %} id="dropdown-menu-home">
+    <a href="{% url "home" %}"><i class="fa fa-home"></i>{% trans "HOME" %}</a>
+    </li>
+    {% endif %}
+
+    {% if page.in_menu %}
+    <li class="{% if page.has_children_in_menu %}dropdown{% endif %}
+    {% if page.is_current_or_ascendant %}active {% else %} {% if page.has_children_in_menu %} hover-active-dropdown{% else %} hover-active {% endif %} {% endif %}"
+    id="{{ page.html_id }}">
+    <a href="{{ page.get_absolute_url }}"
+        {% if page.has_children_in_menu %}
+        class="dropdown-toggle disabled" data-toggle="dropdown"
+        {% endif %}>
+
+        {% if page.font_awesome_icon %}
+        <i class="fa {{ page.font_awesome_icon }}"></i>
+        {% endif %}
+
+        {% if page.navbar_title %}
+            {{ page.navbar_title|upper }}
+        {% else %}
+            {{ page.title|upper }}
+        {% endif %}
+    </a>
+    {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% else %}
+<ul class="dropdown-menu">
+    {% for page in page_branch %}
+    {% if page.in_menu %}
+    <li class="{% if page.has_children_in_menu %}dropdown-submenu{% endif %}
+    {% if page.is_current_or_ascendant %}active{% endif %}"
+    id="{{ page.html_id }}">
+    <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+    {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endif %}
+{% endspaceless %}
+
+<script>
+var width = $(window).width();
+var hoverover;
+$(document).ready( function(){
+
+        navbarCollapseCheck();
+        $(".hover-active-dropdown").hover(
+            function() { $(this).attr("class", "dropdown hover-active-dropdown active")},
+            function() { $(this).attr("class", "dropdown hover-active-dropdown")}
+            );
+
+        $(".hover-active").hover(
+            function() { $(this).attr("class", "hover-active active")},
+            function() { $(this).attr("class", "hover-active")}
+            );
+        });
+
+function navbarCollapseCheck(){
+    var width = $(window).width();
+    if(width < 767){
+        $(".dropdown-toggle").attr("data-toggle", "dropdown"); 
+        $("#navbar").prop('class', 'navbar navbar-default navbar-fixed-top');
+    }
+    else{
+        $(".dropdown-toggle").attr("data-toggle", " "); 
+        $("#navbar").prop('class', 'navbar navbar-default');
+    }
+}
+
+
+$(window).on('resize', function() {
+        navbarCollapseCheck();
+        });
+
+</script>
+
+
+

@@ -1,0 +1,11 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+{% editable page.homepage.content %}
+{{ page.homepage.content|richtext_filters|safe }}
+{% endeditable %}
+
+{% endblock %}
+
