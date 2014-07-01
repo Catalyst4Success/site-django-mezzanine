@@ -7,7 +7,7 @@
     <div class="welcome-text">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <img src="{{ STATIC_URL }}files/logotransparent.png" style="width:50%;" ><br><br>
+                <img src="{{ MEDIA_URL }}{% thumbnail sitewide.logo 691 0 50 %}" style="width:100%;" ><br><br>
                 <h1 style="font-family:Lato">{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }}{% endif %}</h1>
                 {% editable page.homepage.text1 %}<h2>{{ page.homepage.text1 }}</h2>{% endeditable %}
             </div>
@@ -41,9 +41,9 @@
                         {% for post in blog_posts %}
                         <div class="col-md-4">
                             <a href="{{ post.get_absolute_url }}">                   
-                                <img src="{{ STATIC_URL }}pressreleases/1.jpg" style="border:2px solid black;" width="100%">
+                                <img src="{% if post.featured_image %}{{ MEDIA_URL }}{% thumbnail post.featured_image 400 0 %}{% else %}{{ STATIC_URL }}null.jpg {% endif %}" style="border:2px solid black;" width="100%">
                             </a>
-                            <center><p>UC San Diego Chancellor Emerita Marye Anne Fox Joins Catalyst Advisory Board</p></center>
+                            <center><p>{{ post.title }}</p></center>
                         </div>
                         {% endfor %}
                         {% endwith %}
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="map hidden-xs" id="map">
-            <img id="map-image" src="{{ page.homepage.section3BackgroundPicture.url }}" style="visibility: hidden;" width="100%">
+            <img id="map-image" src="{{ MEDIA_URL }}{% thumbnail page.homepage.section3BackgroundPicture 1000 0 %}" style="visibility: hidden;" width="100%">
             <div id="map-button"><a href="{{ page.homepage.section3Link }}"><button type="button" class="btn btn-danger">{{ page.homepage.section3ButtonTitle }}</button></a></div>
         </div>
         <div class="didyouknow" style="background-color:{{ page.homepage.section4BackgroundColor }}">

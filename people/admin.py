@@ -27,5 +27,12 @@ class MemberCategoryAdmin(admin.ModelAdmin):
 class PeopleAdmin(PageAdmin):
     inlines = (PeopleInline,)
 
+    def __init__(self, *args, **kwargs):
+        super(PeopleAdmin, self).__init__(*args, **kwargs)
+        fieldsets = self.fieldsets
+        fieldsets[0][1]["fields"].pop(1)
+        fieldsets[0][1]["fields"].pop(1)
+        fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
+
 admin.site.register(PeoplePage, PeopleAdmin)
 admin.site.register(MemberCategory, MemberCategoryAdmin)

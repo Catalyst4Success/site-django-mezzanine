@@ -13,7 +13,7 @@
         {% if forloop.counter|divisibleby:4 %}</div>{% endif %}
         {% if forloop.counter|divisibleby:4 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
         <div class="col-md-4">
-            <img style="float: left; padding-right: 10px; height:133px;" src="{{ person.file.url }}">
+            <img style="float: left; padding-right: 10px; height:133px;" src="{{ MEDIA_URL }}{% thumbnail person.file 0 133 %}">
             <h2>{% editable person.name %}{{ person.name }}{% endeditable %}</h2>
             <h4>{% editable person.position %}{{ person.position }}{% endeditable %}</h4>
             <p>{% editable person.email %}{{ person.email }}{% endeditable %}</p>
@@ -30,6 +30,7 @@
         <div style="background-color:{{ category.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
             {% editable category.title %}<h1 style="color:black"><center>{{ category.title }}</center></h1>{% endeditable %}
         </div>
+        <br>
 
 
 <div class="row" style="padding-left: 25px; width:100%;">
@@ -39,7 +40,7 @@
         {% if forloop.counter|divisibleby:4 %}</div>{% endif %}
         {% if forloop.counter|divisibleby:4 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
         <div class="col-md-4">
-            <img style="float: left; padding-right: 10px; height:133px;" src="{{ person.file.url }}">
+            <img style="float: left; padding-right: 10px; height:133px;" src="{{ MEDIA_URL }}{% thumbnail person.file 0 133 %}">
             <h2>{% editable person.name %}{{ person.name }}{% endeditable %}</h2>
             <h4>{% editable person.position %}{{ person.position }}{% endeditable %}</h4>
             <p>{% editable person.email %}{{ person.email }}{% endeditable %}</p>

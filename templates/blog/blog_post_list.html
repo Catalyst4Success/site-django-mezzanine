@@ -42,7 +42,6 @@
 {% endblock %}
 
 {% block main %}
-<div class="container">
 {% if tag or category or year or month or author %}
     {% block blog_post_list_filterinfo %}
     <p>
@@ -72,6 +71,7 @@
 {% endif %}
 
 {% for blog_post in blog_posts.object_list %}
+<div class="container">
 {% block blog_post_list_post_title %}
 {% editable blog_post.title %}
 <h2>
@@ -129,7 +129,6 @@
     <p>
     <a href="{{ blog_post.get_absolute_url }}">{% trans "read more" %}</a>
     {% if blog_post.allow_comments %}
-    /
     {% if settings.COMMENTS_DISQUS_SHORTNAME %}
     <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
         data-disqus-identifier="{% disqus_id_for blog_post %}">
