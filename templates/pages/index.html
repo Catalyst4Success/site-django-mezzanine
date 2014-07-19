@@ -11,7 +11,7 @@
                 <h1 style="font-family:Lato">{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }}{% endif %}</h1>
                 {% editable page.homepage.text1 %}<h2>{{ page.homepage.text1 }}</h2>{% endeditable %}
             </div>
-            <i class="fa fa-chevron-down fa-2x down-arrow" style="color:white; position: absolute; left:50%; top:90%; cursor:pointer;" onclick="goToByScroll('navbarfiller')"></i>
+            <i class="fa fa-chevron-down fa-2x down-arrow" style="color:white; position: absolute; left:50%; top:90%; cursor:pointer;" onclick="goToByScroll('navbar')"></i>
         </div>
     </div>      
 </div>
@@ -85,10 +85,13 @@ $(document).ready( function(){
             else{
             $("#navbar").prop('class', 'navbar navbar-default');
             }
-            });
+	if($(window).scrollTop() < welcbottom){
+            var interval = setInterval(function(){goToByScroll('navbar'); clearInterval(interval);},10000);
+        }
+})
         });
-        </script>
-        <script>
+				   </script>
+<script>
 function goToByScroll(id){
     // Scroll
     $('html,body').animate({

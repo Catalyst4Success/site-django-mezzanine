@@ -5,4 +5,5 @@ from .models import PeoplePage
 @processor_for(PeoplePage)
 def people_extra(request, page):
     nolabel = page.peoplepage.people.filter(member_category=None)
-    return {"nolabel": nolabel}
+    rankorder = page.peoplepage.categories.order_by('rank')
+    return {"nolabel": nolabel, "rankorder": rankorder}

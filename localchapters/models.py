@@ -5,7 +5,7 @@ from mezzanine.core.models import Orderable, RichText, Slugged
 from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.utils.models import upload_to
 from mezzanine.generic.fields import KeywordsField
-from custom.models import CatalystPage
+from project.custom.models import CatalystPage
 
 class LocalChaptersPage(Page, RichText):
     chapters = models.ManyToManyField("LocalChapter", verbose_name=_("Local Chapters"), blank=True, related_name="chapters")

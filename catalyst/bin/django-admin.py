@@ -1,4 +1,4 @@
-#!/home/edward/Desktop/catalystv4/catalyst/bin/python
+#!/home/cata3017/catalystcms/project/catalyst/bin/python
 from django.core import management
 
 if __name__ == "__main__":

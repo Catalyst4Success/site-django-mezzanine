@@ -1,7 +1,7 @@
 from mezzanine import template
 from mezzanine.utils.sites import current_site_id
 
-from info.models import SitewideContent
+from project.info.models import SitewideContent
 
 register = template.Library()
 

@@ -19,7 +19,7 @@ class PeopleInline(StackedDynamicInlineAdmin):
        fields.append('member_category')
 
 class MemberCategoryAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {"fields": ("title","page","heading_bar_color",)}),)
+    fieldsets = ((None, {"fields": ("title","page","heading_bar_color","rank",)}),)
 
     def in_menu(self):
         return True;

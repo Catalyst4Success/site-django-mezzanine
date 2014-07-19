@@ -159,7 +159,8 @@ class Page(BasePage):
         Changes this page's slug, and all other pages whose slugs
         start with this page's slug.
         """
-        for page in Page.objects.filter(slug__startswith=self.slug):
+        slug_prefix = "%s/" % self.slug
+        for page in Page.objects.filter(slug__startswith=slug_prefix):
             if not page.overridden():
                 page.slug = new_slug + page.slug[len(self.slug):]
                 page.save()
@@ -304,12 +305,13 @@ class Link(Page):
 
 
 class PageMoveException(Exception):
-    '''
+    """
     Raised by ``can_move()`` when the move permission is denied. Takes
     an optinal single argument: a message explaining the denial.
-    '''
-    def __init__(self, msg=ugettext('Illegal page move')):
-        self.msg = msg
+    """
+
+    def __init__(self, msg=None):
+        self.msg = msg or ugettext("Illegal page move")
 
     def __str__(self):
         return self.msg

@@ -25,21 +25,18 @@
 </div>
 
 
-{% with page.peoplepage.categories.all as categories %}
+{% with rankorder as categories %}
     {% for category in categories %}
         <div style="background-color:{{ category.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
             {% editable category.title %}<h1 style="color:black"><center>{{ category.title }}</center></h1>{% endeditable %}
         </div>
         <br>
 
-
 <div class="row" style="padding-left: 25px; width:100%;">
-            {% with category.people.all as people %}
+{% with category.people.all as people %}
         {% for person in people %}
 
-        {% if forloop.counter|divisibleby:4 %}</div>{% endif %}
-        {% if forloop.counter|divisibleby:4 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
-        <div class="col-md-4">
+                <div class="col-md-4">
             <img style="float: left; padding-right: 10px; height:133px;" src="{{ MEDIA_URL }}{% thumbnail person.file 0 133 %}">
             <h2>{% editable person.name %}{{ person.name }}{% endeditable %}</h2>
             <h4>{% editable person.position %}{{ person.position }}{% endeditable %}</h4>
@@ -47,6 +44,9 @@
             {% editable person.bio %}{{ person.bio|richtext_filters|safe }}{% endeditable %}
 
         </div>
+{% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+        {% if forloop.counter|divisibleby:3 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
+
         {% endfor %}
         {% endwith %}
 </div>

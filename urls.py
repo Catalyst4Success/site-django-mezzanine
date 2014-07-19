@@ -5,6 +5,10 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
+from django.conf.urls.static import static
+from django.conf import settings
+
+
 
 
 admin.autodiscover()
@@ -45,6 +49,9 @@ urlpatterns += patterns('',
     # doesn't apply here, since we can't have a template called
     # "/.html" - so for this case, the template "pages/index.html"
     # should be used if you want to customize the homepage's template.
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.STATIC_ROOT,
+        }),
 
     url("^$", "mezzanine.pages.views.page", {"slug": "/"}, name="home"),
 
@@ -65,7 +72,7 @@ urlpatterns += patterns('',
     # FOR PAGES, SO URLPATTERNS ADDED BELOW ``mezzanine.urls``
     # WILL NEVER BE MATCHED!
 
-    # If you'd like more granular control over the patterns in
+# If you'd like more granular control over the patterns in
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.

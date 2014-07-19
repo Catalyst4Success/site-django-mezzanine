@@ -34,7 +34,7 @@ class Person(Orderable):
 class MemberCategory(Slugged):
     page = models.ForeignKey("PeoplePage", related_name="categories") 
     heading_bar_color = models.CharField(_("Heading Bar Color"), max_length=10, blank=True)
-
+    rank = models.PositiveIntegerField()
     class Meta:
         verbose_name = _("Member Category")
         verbose_name_plural = _("Member Categories")
