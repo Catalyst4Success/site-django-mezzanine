@@ -1,0 +1,123 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+
+
+<div class="container hidden-xs hidden-sm hidden-md" style="width:70%">
+    {% editable page.localchapterspage.content %}
+    {{ page.localchapterspage.content|richtext_filters|safe }}
+    {% endeditable %}
+    <div class="row" style="width:100%;">
+        <div class="col-md-4 col-md-offset-1" style="padding-right:0px">
+        <ul id="row" class="nav nav-pills nav-stacked">
+
+            {% with page.localchapterspage.chapters.all as chapterg %}
+            {% for chapter in chapterg %}
+            <li {% if forloop.first %}class="active"{% endif %} {% if forloop.last %} style="border-bottom:1px solid black;" {% endif %} id="{{ chapter.schoolName | slugify }}" onclick="changeChapter('{{ chapter.schoolName | slugify }}')"><a href="#"><center>{{ chapter.schoolName }}</center></a></li>
+
+            {% endfor %}
+            {% endwith %}
+
+        </ul>
+    </div>
+    <div class="col-md-7" id="map" style="border:1px solid black; border-left:0px; background-color:#7DCBE5 ">
+        <div class="col-md-6">
+            <img id="sd-map" src="{{ MEDIA_URL }}{% thumbnail page.localchapterspage.file 500 0 %}" style="max-width:100%">
+        </div>
+        <div class="col-md-6" style="max-width:100%">
+            <center>
+                <br><br>
+                {% with page.localchapterspage.chapters.all|slice:":1" as chapterg %}
+                {% for chapter in chapterg %}
+                <p style="font-weight:bold" id="school-name">{{ chapter.schoolName }}</p>
+                <p id="school-address">{{ chapter.schoolAddress }}<br>{{ chapter.schoolCity }}, {{ chapter.schoolState }}, {{ chapter.schoolZipCode }}</p>
+                <a id="school-website" href="{{ chapter.chapterWebsite }}">{{ chapter.chapterWebsite }}</a>
+                <p id="school-contact">{{ chapter.chapterNumber }}<br>{{ chapter.chapterEmail }}</p>
+
+
+
+                {% endfor %}
+                {% endwith %}
+
+
+            </center>
+        </div>
+    </div>
+</div>
+<br>
+{% editable page.localchapterspage.extra_info %}
+{{ page.localchapterspage.extra_info|richtext_filters|safe }}
+{% endeditable %}
+<br>
+</div>
+
+
+{% with page.localchapterspage.sections.all as sections %}
+{% for section in sections %}
+<div style="background-color:{{ section.heading_bar_color }}; display: block; padding:10px;margin-top:10px;">
+{% editable section.title %}<h2 style="color:white"><center>{{ section.title }}</center></h2>{% endeditable %}
+</div>
+
+<div class="container" style="width:100%">
+{% editable section.textfield %}
+{{ section.textfield|richtext_filters|safe }}
+{% endeditable %}
+
+</div>
+<br><br>
+{% endfor %}
+{% endwith %}
+<script>
+$(window).on("load", function(){
+        var rowheight = $("#row").innerHeight();
+        $("#map").height(rowheight - 0);
+        $("#sd-map").height(rowheight - 2);
+        });
+
+$(window).on('resize', function() {
+        var rowheight = $("#row").innerHeight();
+        console.log("test");
+        $("#map").height(rowheight - 0);
+        $("#sd-map").height(rowheight -2);
+        });
+
+</script>
+
+
+<script>
+function changeChapter(chapter){
+
+    {% with page.localchapterspage.chapters.all as chapterg %}
+    {% for chapter in chapterg %}
+
+    $("#{{ chapter.schoolName | slugify }}").attr("class", " ");
+
+    {% endfor %}
+    {% endwith %}
+
+    $("#" + chapter).attr("class", "active");
+
+    {% with page.localchapterspage.chapters.all as chapterg %}
+    {% for chapter in chapterg %}
+
+    if(chapter == "{{ chapter.schoolName | slugify }}"){
+        $("#school-name").html("{{ chapter.schoolName }}");
+        $("#school-address").html("{{ chapter.schoolAddress }}<br>{{ chapter.schoolCity }}, {{ chapter.schoolState }}, {{ chapter.schoolZipCode }}");
+        $("#school-website").html("{{ chapter.chapterWebsite }}");
+        $("#school-website").attr("href", "{{ chapter.chapterWebsite }}");
+        $("#school-contact").html("{{ chapter.chapterNumber }}<br>{{ chapter.chapterEmail }}");
+    }
+
+
+    {% endfor %}
+    {% endwith %}
+
+
+}
+</script>
+
+
+{% endblock %}
+

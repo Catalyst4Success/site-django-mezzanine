@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles info_tags %}
+{% get_sitewide_content as sitewide %}
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{{ settings.SITE_TITLE }}</title>
+<link rel="shortcut icon" href="{% static "files/favicon.ico" %}">
+
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
+
+{% compress css %}
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static "custom/custom-bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+<link rel="stylesheet" href="{% static "files/styles.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/rtl.css" %}">
+{% endif %}
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+{% endif %}
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% compress js %}
+<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/bootstrap-extras.js" %}"></script>
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}" style="padding-top:0px;">
+<div id="navbarfiller" class="visible-xs">
+</div>
+
+
+{% block before_bar %}{% endblock %}
+
+<div id="navbarfiller">
+    <div id="navbar" class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <img src="{{ MEDIA_URL }}{% thumbnail sitewide.logo 100 0 %}" style="height: 45px;">
+                    {% if settings.SITE_TITLE %}
+                    <div style="margin-left:7px; display: inline;">{{ settings.SITE_TITLE }}</div>{% endif %}
+
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse-nav">
+                {% page_menu "pages/menus/dropdown.html" %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+<div class="container">
+
+    {% nevercache %}
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endnevercache %}
+
+    <center>
+    <h1 style="color: {% block titlestyle %}{% endblock %}">{% block title %}{% endblock %}</h1>
+    </center>
+
+</div>
+            {% block main %}{% endblock %}
+
+<div class="footer">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ MEDIA_URL }}{% thumbnail sitewide.logo 100 0 %}" width="25%"><br>
+            <h3 style="font-family:Lato">{{ settings.SITE_TITLE }} &copy; {%now "Y"%}</h3>
+        </div>
+        <div class="col-md-2 col-md-offset-5" style="padding-top:2%">
+            <b>Contact Us</b><br>{{ sitewide.phonenumber }}<br><u>{{ sitewide.email }}</u>
+        </div>
+        <div class="col-md-1 hidden-sm hidden-xs">
+            <img src="{{STATIC_URL}}files/flask.png" width="60%">
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer_scripts.html" %}
+
+</body>
+</html>

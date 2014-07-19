@@ -1,0 +1,46 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags %}
+
+{% block title %}
+<div class="container" style="width:74%; padding-top:15px;">
+<div style="background-color: {{ page.title_color }}; padding:10px;">
+        <h1 style="color: black"><center>{% editable page.title %}{{ page.title }}{% endeditable %}</center></h1>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block main %}{{ block.super }}
+
+{% editable page.gridpage.content %}
+    {{ page.gridpage.content|richtext_filters|safe }}
+    {% endeditable %}
+
+<div class="container" style="width:55%; padding-top:15px;">
+
+    <div class="row">
+        {% with page.gridpage.gridsection.all as sections %}
+        {% for section in sections %}
+        {% if forloop.counter|divisibleby:3 %}</div><br><div class="row">{% endif %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                {% editable section.title %}<center><h4 class="fa {{ section.icon }}"> {{ section.title }}</h4></center>{% endeditable %}
+            </div>
+        <p style="padding-left:40px">
+        {% editable section.textfield %}
+        {{ section.textfield|richtext_filters|safe }}
+        {% endeditable %}
+        </p>
+
+        </div>
+
+    {% endfor %}
+    {% endwith %}
+</div>
+</div>
+
+
+<br><br><br><br><br>
+    {% endblock %}
+
