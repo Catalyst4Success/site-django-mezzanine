@@ -6,6 +6,7 @@ from copy import deepcopy
 from mezzanine.core.admin import TabularDynamicInlineAdmin, StackedDynamicInlineAdmin, BaseDynamicInlineAdmin, DisplayableAdmin
 from mezzanine.pages.admin import PageAdmin
 from .models import Person, PeoplePage, MemberCategory
+
 # Register your models here.
 
 class PeopleInline(StackedDynamicInlineAdmin):
@@ -30,8 +31,6 @@ class PeopleAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(PeopleAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 admin.site.register(PeoplePage, PeopleAdmin)

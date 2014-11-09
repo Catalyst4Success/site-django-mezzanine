@@ -20,8 +20,8 @@
 {% block main %}
 
 <div class="container" style="width:100%">{% editable page.homepage.content %}
-{{ page.homepage.content|richtext_filters|safe }}
-{% endeditable %}
+    {{ page.homepage.content|richtext_filters|safe }}
+    {% endeditable %}
 </div>
 <div class="quote" style="background-color:{{ page.homepage.quoteColor }}">
     {% editable page.homepage.quoteA %}<h1><center>{{ page.homepage.quoteA }}</center></h1>{% endeditable %}
@@ -48,59 +48,72 @@
                         {% endfor %}
                         {% endwith %}
 
-             <div id="latest-news-button"><a href="/blog"><button style="margin-top:5%" type="button" class="btn btn-success pull-right">{{ page.homepage.section2ButtonTitle }}</button</a></div>
+                        <div id="latest-news-button"><a href="/blog"><button style="margin-top:5%" type="button" class="btn btn-success pull-right">{{ page.homepage.section2ButtonTitle }}</button</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="map hidden-xs" id="map">
-            <img id="map-image" src="{{ MEDIA_URL }}{% thumbnail page.homepage.section3BackgroundPicture 1000 0 %}" style="visibility: hidden;" width="100%">
-            <div id="map-button"><a href="{{ page.homepage.section3Link }}"><button type="button" class="btn btn-danger">{{ page.homepage.section3ButtonTitle }}</button></a></div>
-        </div>
-        <div class="didyouknow" style="background-color:{{ page.homepage.section4BackgroundColor }}">
-            <div class="row">
-                <div class="col-md-4">
-                    {% editable page.homepage.section4Title %}<center><h1>{{ page.homepage.section4Title }}</h1></center>{% endeditable %}
-                </div>
-                <div class="col-md-6">
-                    <h4>
-                        {% include "includes/cache.txt" %}
-                    </h4>
-                    <a href="facts.php"><center><button type="button" class="btn btn-danger">More Fun Facts</button></center></a>
+            <div class="map hidden-xs" id="map">
+                <img id="map-image" src="{{ MEDIA_URL }}{% thumbnail page.homepage.section3BackgroundPicture 1000 0 %}" style="visibility: hidden;" width="100%">
+                <div id="map-button"><a href="{{ page.homepage.section3Link }}"><button type="button" class="btn btn-danger">{{ page.homepage.section3ButtonTitle }}</button></a></div>
+            </div>
+            <div class="didyouknow" style="background-color:{{ page.homepage.section4BackgroundColor }}">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% editable page.homepage.section4Title %}<center><h1>{{ page.homepage.section4Title }}</h1></center>{% endeditable %}
+                    </div>
+                    <div class="col-md-6">
+                        <h4>
+                            {% include "includes/cache.txt" %}
+                        </h4>
+                        <a href="facts.php"><center><button type="button" class="btn btn-danger">More Fun Facts</button></center></a>
 
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <script>
-$(document).ready( function(){
-        var welctop = $("#welcome").offset().top;
-        var welcbottom = welctop + $("#welcome").height();
-        $(window).scroll(function(){
-            var top = $(window).scrollTop();
-            var bottom = top + $(window).height();
-            if(top > welcbottom || $(window).width() < 767){
-            $("#navbar").prop('class', 'navbar navbar-default navbar-fixed-top');
-            }
-            else{
-            $("#navbar").prop('class', 'navbar navbar-default');
-            }
-	if($(window).scrollTop() < welcbottom){
-            var interval = setInterval(function(){goToByScroll('navbar'); clearInterval(interval);},10000);
-        }
-})
-        });
-				   </script>
-<script>
-function goToByScroll(id){
-    // Scroll
-    $('html,body').animate({
-scrollTop: $("#"+id).offset().top},
-'slow');
-    // Scroll
-}
+            <script>
+                $(document).ready( function(){
+                    var welctop = $("#welcome").offset().top;
+                    var welcbottom = welctop + $("#welcome").height();
+                    $(window).scroll(function(){
+                        var top = $(window).scrollTop();
+                        var bottom = top + $(window).height();
+                        if(top > welcbottom || $(window).width() < 767){
+                            $("#navbar").prop('class', 'navbar navbar-default navbar-fixed-top');
+                        }
+                        else{
+                            $("#navbar").prop('class', 'navbar navbar-default');
+                        }
+                    });
+                    var interval = setInterval(function(){goToByScrollTimedNavbar(); clearInterval(interval);},10000);
+                }
+                );
+            </script>
+            <script>
+                function goToByScroll(id){
+                    // Scroll
+                    $('html,body').animate({
+                        scrollTop: $("#"+id).offset().top},
+                    'slow');
+                    // Scroll
+                }
 
-        </script>
+                function goToByScrollTimedNavbar(){
+                    // Scroll
+                    var welctop = $("#welcome").offset().top;
+                    var welcbottom = welctop + $("#welcome").height();
+                    var top = $(window).scrollTop();
 
-        {{ block.super }}
-        {% endblock %}
+                    if(top < welcbottom){
+                        goToByScroll("navbar")
+                    }
+                    // Scroll
+                }
+
+
+            </script>
+
+            {{ block.super }}
+
+            {% endblock %}

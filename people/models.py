@@ -8,7 +8,7 @@ from mezzanine.generic.fields import KeywordsField
 
 
 class PeoplePage(Page, RichText):
-        
+       
     class Meta:
         verbose_name = _("People Page")
         verbose_name_plural = _("People Pages")

@@ -16,8 +16,6 @@ class VideoAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(VideoAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 admin.site.register(VideosPage, VideoAdmin)

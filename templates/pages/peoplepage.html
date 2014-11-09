@@ -46,6 +46,7 @@
         </div>
 {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
         {% if forloop.counter|divisibleby:3 %}<div class="row" style="padding-left: 25px; width:100%;">{% endif %}
+	{% if forloop.last %}</div></div>{% endif %}
 
         {% endfor %}
         {% endwith %}

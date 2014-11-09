@@ -19,8 +19,6 @@ class CatalystPageAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(CatalystPageAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 class GridSectionInline(StackedDynamicInlineAdmin):
@@ -31,8 +29,6 @@ class GridPageAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(GridPageAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 class HomePageAdmin(PageAdmin):
@@ -42,8 +38,6 @@ class HomePageAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(HomePageAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 class GalleryImageInline(TabularDynamicInlineAdmin):
@@ -58,8 +52,6 @@ class GalleryAdmin(PageAdmin):
     def __init__(self, *args, **kwargs):
         super(GalleryAdmin, self).__init__(*args, **kwargs)
         fieldsets = self.fieldsets
-        fieldsets[0][1]["fields"].pop(1)
-        fieldsets[0][1]["fields"].pop(1)
         fieldsets[0][1]["fields"].insert(1,["font_awesome_icon","navbar_title","title_color",])
 
 

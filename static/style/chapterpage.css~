@@ -1,0 +1,9 @@
+.page-welcome{
+    background-image:url(static/images/background.jpg);
+}
+.page-twitter{
+    background-image:url(static/images/backgroundt.jpg);
+}
+.page-features{
+    background-image:url(static/images/backgroundf.jpg);
+}
