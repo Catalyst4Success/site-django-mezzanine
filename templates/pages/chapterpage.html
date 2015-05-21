@@ -70,7 +70,7 @@
     <div class="pages white paralax page-welcome" id="page-welcome">
         <style>
             .page-welcome{
-                background-image:url('{{ page.chapterpage.firstBackgroundPicture.url }}');
+                background-image:url('{{ MEDIA_URL }}{% thumbnail page.chapterpage.firstBackgroundPicture 800 0 %}');
             }
             </style>
         <div class="overlay"></div>
@@ -205,7 +205,7 @@
                         
                         ">
                             <!-- Portfolio image -->
-                            <img src="{{ picture.file.url }}" alt="Treble">
+                            <img src="{{ MEDIA_URL }}{% thumbnail picture.file 300 0 %}" alt="Treble">
                     </li>
                         {% endfor %}
                         {% endwith %}
@@ -222,7 +222,7 @@
     <!-- PAGE | CLIENTS -->
         
     <!-- PAGE | FEATURES  -->
-    <div class="pages white paralax page-features" id="page-hands-on" style="background-image:url({{ page.chapterpage.secondBackgroundPicture.url}})">
+    <div class="pages white paralax page-features" id="page-hands-on" style="background-image:url({{ MEDIA_URL }}{% thumbnail page.chapterpage.secondBackgroundPicture 700 0 %})">
         <div class="overlay"></div>
         <div class="container">
              <!-- Header -->
@@ -247,7 +247,7 @@
     <!-- END PAGE | FEATURES -->
 
 <!-- PAGE | FEATURES  -->
-<div class="pages white paralax page-twitter" id="page-shows" style="background-image:url({{ page.chapterpage.thirdBackgroundPicture.url}})">
+<div class="pages white paralax page-twitter" id="page-shows" style="background-image:url({{ MEDIA_URL }}{% thumbnail page.chapterpage.thirdBackgroundPicture 700 0 %})">
         <div class="overlay"></div>
         <div class="container">
              <!-- Header -->
