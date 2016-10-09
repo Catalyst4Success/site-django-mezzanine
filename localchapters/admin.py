@@ -66,7 +66,7 @@ class ChapterPictureAdmin(admin.ModelAdmin):
 
 
 class ChapterMemberAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {"fields": ("name","position","email", "file", "bio")}),)
+    fieldsets = ((None, {"fields": ("name","position","email", "file", "bio", "isAlumni",)}),)
 
     def in_menu(self):
         return True;

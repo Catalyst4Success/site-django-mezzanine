@@ -106,6 +106,7 @@ class ChapterMember(Orderable):
     file = FileField(_("File"), max_length=200, format="Image",
                      upload_to=upload_to("Localchapters.ChapterMember.file", "Localchapters"))
     bio = RichTextField(_("Bio"), blank=True)
+    isAlumni = models.CharField(_("Is Alumni"), max_length = 100, default="false", blank=True)
     
     def __str__(self):
         return self.name
